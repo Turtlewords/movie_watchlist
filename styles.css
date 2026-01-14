@@ -1,0 +1,81 @@
+@font-face {
+    font-family: Comfortaa;
+    src: url("fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf")
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Comfortaa, sans-serif;
+    min-height: 100vh;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-image:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("images/theater.jpg");
+    /* background-blend-mode: darken; */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.main {
+    background-color: rgba(0, 0, 0, 0.3);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 3rem;
+    height: 100%;
+    flex-grow: 2;
+    position: relative;
+}
+
+.film-background {
+    width: 3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+
+
+/* Typography */
+
+.title {
+    color: whitesmoke;
+    font-size: 3rem;
+}
+
+header .link {
+    font-size: 1.5rem;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.link:hover {
+    opacity: 0.7;
+}
+
+.watchlist-link {
+    color: whitesmoke;
+}
