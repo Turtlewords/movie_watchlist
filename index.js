@@ -31,6 +31,7 @@ function searchMovies(keyword) {
     fetch(`http://www.omdbapi.com/?apikey=${APIKey}&s=${keyword}`)
     .then(res => res.json())
     .then((data) => {
+        console.log(data)
         populateMovieResults(data.Search)
     })
 }
@@ -42,7 +43,24 @@ function populateMovieResults(data) {
         <div class="movie">
             <img class="poster" src=${item.Poster} alt=${item.Title}>
             <div class="movie-data">
-                <h2 class="movie-title">${item.Title}</h2>
+                <div class="movie-title-rating">
+                    <h2 class="movie-title">${item.Title}</h2>
+                    <div class="rating-container">
+                        <img src="/images/star.svg">
+                        <p class="rating">${item.imdbRating}</p>
+                    </div>
+                </div>
+                <div class="movie-details">
+                    <p class="movie-length">${item.Runtime}</p>
+                    <p class="movie-genre">${item.Genre}</p>
+                    <a class="add-link link" href="index.html">
+                        <img class="add-icon" src="images/plus_dark.svg">
+                        Let's add some movies!
+                    </a>
+                </div>
+                <div class="movie-summary">
+                    <p class="summary-text">${item.Plot}</p>
+                </div>
             </div>
         </div>
         `
