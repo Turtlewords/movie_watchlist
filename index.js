@@ -7,6 +7,10 @@ const watchlist = document.querySelector(".watchlist")
 const userQuery = document.querySelector("#search")
 const searchBtn = document.querySelector("#search-btn")
 
+let tempMovies = {}
+
+const moviesObj = localStorage.getItem("watchlist") ? JSON.parse(localStorage.getItem("watchlist")) : {};
+
 // Event Listeners
 
 searchBtn.addEventListener("click", (e) => {
@@ -28,7 +32,7 @@ function checkWatchlist() {
 
 
 function searchMovies(keyword) {
-    fetch(`http://www.omdbapi.com/?apikey=${APIKey}&s=${keyword}`)
+    fetch(`http://www.omdbapi.com/?apikey=${APIKey}&s=${keyword}&`)
     .then(res => res.json())
     .then((data) => {
         console.log(data)
@@ -37,36 +41,39 @@ function searchMovies(keyword) {
 }
 
 function populateMovieResults(data) {
-
+    
     for (let item of data) {
+        tempMovies[item.Title] = item
         movieResults.innerHTML += `
         <div class="movie">
             <img class="poster" src=${item.Poster} alt=${item.Title}>
             <div class="movie-data">
-                <div class="movie-title-rating">
-                    <h2 class="movie-title">${item.Title}</h2>
-                    <div class="rating-container">
-                        <img src="/images/star.svg">
-                        <p class="rating">${item.imdbRating}</p>
-                    </div>
-                </div>
-                <div class="movie-details">
-                    <p class="movie-length">${item.Runtime}</p>
-                    <p class="movie-genre">${item.Genre}</p>
-                    <a class="add-link link" href="index.html">
-                        <img class="add-icon" src="images/plus_dark.svg">
-                        Let's add some movies!
-                    </a>
-                </div>
-                <div class="movie-summary">
-                    <p class="summary-text">${item.Plot}</p>
-                </div>
+                <h2 class="movie-title">${item.Title}</h2>
+                <p class="movie-year">${item.Year}<p>
+                <p class="add-to-watchlist" onclick="addToWatchList('${item.Title}')">
+                    <img class="add-icon" src="images/plus_dark.svg">
+                        Add  to watchlist
+                </p>
             </div>
         </div>
         `
     }
 }
 
+function addToWatchList(title) {
+
+    let movieToAdd = JSON.parse(localStorage.getItem(title))
+
+    if (!movieToAdd) {
+        movieToAdd = tempMovies[title]
+        localStorage.setItem(title, JSON.stringify(movieToAdd))
+    }
+
+}
+
 // Function calls
+
+
+
 
 checkWatchlist()
