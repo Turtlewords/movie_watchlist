@@ -55,7 +55,7 @@ function populateMovieResults(data) {
     for (let item of data) {
         tempMovies[item.Title] = item
         movieResults.innerHTML += `
-        <div class="movie">
+        <div class="movie movie-${item.Title}">
             <img class="poster" src=${item.Poster} alt=${item.Title}>
             <div class="movie-data">
                 <h2 class="movie-title">${item.Title}</h2>
@@ -81,10 +81,16 @@ function addToWatchList(title) {
 function removeFromWatchList(title) {
     let watchlist = JSON.parse(localStorage.getItem("watchlist"))
     // watchlist[title] = JSON.stringify(tempMovies[title])
-    delete watchlist.title
-    
+    console.log(watchlist[title])
+    delete watchlist[title]
     localStorage.setItem("watchlist", JSON.stringify(watchlist))
+    location.reload();
 }
+
+// function removeFromWatchListHTML(element) {
+//     const elementToRemove = document.querySelector(element)
+//     element.remove()
+// }
 
 function displayWatchList() {
     let data = JSON.parse(localStorage.getItem("watchlist"))
