@@ -126,6 +126,13 @@ body {
     font-family: inherit;
 }
 
+.watchlist {
+    padding: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+}
+
 
 
 
